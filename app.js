@@ -1,24 +1,20 @@
-const images = document.querySelectorAll('img')
 const image_slider = document.querySelector('.image-slider')
 let activeSlide = 0
 let direction = 'right'
-let forward
-let backward
+let forward,backward
+let timer
 const fetchImg = (url) => {
-    return fetch(url).then(res => res.blob()).then(image => {
-        src = URL.createObjectURL(image)
-        return src
+    return fetch(url).then(res => res.blob()).then(blob => {
+        return URL.createObjectURL(blob)
     })
 }
 const Images = async () => {
-    const img1 = await fetchImg(`./images/hosur.jpg`)
-    const img2 = await fetchImg(`./images/ooty.jpg`)
-    const img3 = await fetchImg(`./images/vellore.jpg`)
-    const img4 = await fetchImg(`./images/trichy.jpg`)
-    const img5 = await fetchImg(`./images/villupuram.jpg`)
-    const img6 = await fetchImg(`./images/madurai.jpg`)
-    const img7 = await fetchImg(`./images/krishnagiri.jpg`)
-    return [img1,img2,img3,img4,img5,img6,img7]
+    const img1 = await fetchImg(`./Images/india.jpg`)
+    const img2 = await fetchImg(`./Images/london.jpg`)
+    const img3 = await fetchImg(`./Images/switzerland.jpg`)
+    const img4 = await fetchImg(`./Images/greenland.jpg`)
+    const img5 = await fetchImg(`./Images/canada.jpg`)
+    return [img1,img2,img3,img4,img5]
 }
 const imgObject = []
 Images().then(data => {
@@ -29,47 +25,55 @@ Images().then(data => {
         image_slider.appendChild(div)
         const img = document.createElement('img')
         img.src = data
-        img.alt = data
+        img.alt = "Image Slider"
         div.appendChild(img)
         imgObject[i] = img
         i++ 
     })
 }).then(() => {
-    backward = document.querySelector('.ion-ios-arrow-back')
     forward = document.querySelector('.ion-ios-arrow-forward')
-    moveSlides(activeSlide)
+    backward = document.querySelector('.ion-ios-arrow-back')
     forward.addEventListener('click' , () => {
+        clearInterval(timer)
+        timer = setInterval(() => {
+            changeSlide()
+        },5000)
         direction = 'right'
-        click_to_move()
+        changeSlide()
     })
     backward.addEventListener('click' , () => {
+        clearInterval(timer)
+        timer = setInterval(() => {
+            changeSlide()
+        },5000)
         direction = 'left'
-        click_to_move()
+        changeSlide()
     })
-    setInterval(() => {
-        moveSlides(activeSlide)
-        click_to_move()
+    applyStyles()
+    timer = setInterval(() => {
+        changeSlide()
     },5000)
 })
 
-const click_to_move = () => {
+const changeSlide = () => {
     if(activeSlide === imgObject.length-1){
         activeSlide--
         direction = 'left'
-        moveSlides(activeSlide)
+        applyStyles()
     } else if(activeSlide === 0){
         activeSlide++
         direction = 'right'
-        moveSlides(activeSlide)
+        applyStyles()
     } else if(activeSlide > 0 && direction === 'right'){
         activeSlide++
-        moveSlides(activeSlide)
+        applyStyles()
     } else if(activeSlide < imgObject.length && direction === 'left'){
         activeSlide--
-        moveSlides(activeSlide)
+        applyStyles()
     }
 }
-const moveSlides = (activeSlide) => {
+
+const applyStyles = () => {
     if(activeSlide === 0){
         backward.style.display = 'none'
     } else if(activeSlide === imgObject.length-1){
