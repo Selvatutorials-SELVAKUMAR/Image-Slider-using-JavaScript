@@ -1,8 +1,8 @@
 <h1>Build a Image Slider using </h1>
 <ol>
-  <li><h2>HTML</h2></li>
-  <li><h2>CSS</h2></li>
-  <li><h2>JavaScript</h2></li>
+  <h2><li>HTML</li></h2>
+  <h2><li>CSS</li></h2>
+  <h2><li>JavaScript</li></h2>
 </ol>
 
 <h1>YouTube Video Link = <a href = "https://youtu.be/eeXFnPqXMf8">Image Slider</a></h1>
