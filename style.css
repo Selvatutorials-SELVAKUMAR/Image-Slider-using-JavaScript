@@ -6,7 +6,7 @@
 }
 
 body{
-    background: linear-gradient(to right, #480048, #C04848); 
+    background: linear-gradient(to right , #480048 , #c04848);
     color: lightgreen;
 }
 
@@ -22,22 +22,21 @@ body{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
-    overflow: hidden;
 }
 
 .image{
     grid-column: 1;
     grid-row: 1;
-    width: 100%;
-    height: 100%;
-    transition: transform 2s;
+    overflow: hidden;
 }
+
 img{
     z-index: 0;
     width: 100%;
     height: 100%;
     transition: transform .4s;
 }
+
 .active{
     transform: translateX(0);
 }
@@ -49,7 +48,6 @@ img{
 .right{
     transform: translateX(100%);
 }
-
 
 i{
     z-index: 1;
@@ -76,5 +74,5 @@ i{
 }
 .ion-ios-arrow-back:hover , .ion-ios-arrow-forward:hover{
     cursor: pointer;
-    background-color: lightslategray;
+    background-color: #c04848;
 }
